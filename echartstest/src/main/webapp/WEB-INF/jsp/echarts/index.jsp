@@ -195,7 +195,7 @@
         }
         ;
 
-        var url = "${pageContext.request.contextPath}echarts/getData.do?index=" + index + "&year=" + year + "&areaCode=" + code;
+        var url = "${pageContext.request.contextPath}/echarts/getData.do?index=" + index + "&year=" + year + "&areaCode=" + code;
         if (month != null) {
             url += "&month=" + month;
             timestamp = year + "年" + month + "月";
@@ -217,7 +217,7 @@
                         showChart(index, data, timestamp);
                     }
                 } else {
-                    $("#main" + index).html("<img src='$!rc.contextPath/assets/xjgl/skins/xjgl/images/noData.png' />");
+                    $("#main" + index).html("<img src='${pageContext.request.contextPath}/assets/xjgl/skins/xjgl/images/noData.png' />");
                 }
             },
             error: function (data) {

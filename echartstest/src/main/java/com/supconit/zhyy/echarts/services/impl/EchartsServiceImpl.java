@@ -8,6 +8,7 @@ import com.supconit.zhyy.echarts.services.EchartsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,7 +50,6 @@ public class EchartsServiceImpl implements EchartsService {
      */
     private static String[] xAxisMonthData = {"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"};
 
-
     /**
      * 按年份查询 yyyy
      *
@@ -61,16 +61,21 @@ public class EchartsServiceImpl implements EchartsService {
      */
     public EchartsData getDataByYear(Integer year, String areaCode, String[] legendData, List<YAxis> yAxisList) {
         //得到Y轴数据
-        EchartsData result = new EchartsData(legendData, xAxisMonthData);// xAxisMonthData ={"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"};
+        // xAxisMonthData ={"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"};
+        EchartsData result = new EchartsData(legendData, xAxisMonthData);
         result.setYyAxisData(yAxisList);
 
         //得到X轴数据
         //1、上一年同期
         List<EchartsData> lastyearData = echartsDao.getDataByYear((year - 1), areaCode);
-        Double[] lastyearFullData = translateMonthKey((year - 1), lastyearData);//没有月份数据补充0 (上一年同期)
+        //没有月份数据补充0 (上一年同期)
+        Double[] lastyearFullData = translateMonthKey((year - 1), lastyearData);
+
         //2、当年
         List<EchartsData> yearData = echartsDao.getDataByYear(year, areaCode);
-        Double[] yearFullData = translateMonthKey(year, yearData);//没有月份数据补充0(当年)
+        //没有月份数据补充0(当年)
+        Double[] yearFullData = translateMonthKey(year, yearData);
+
         //3、同比增长率
         Double[] percent = new Double[xAxisMonthData.length];
         for (int i = 0; i < xAxisMonthData.length; i++) {
@@ -83,9 +88,12 @@ public class EchartsServiceImpl implements EchartsService {
         }
 
         List<Series> serieses = new ArrayList<>();
-        serieses.add(new Series(legendData[0], "bar", 0, yearData(year, lastyearFullData)));//上一年同期
-        serieses.add(new Series(legendData[1], "bar", 0, yearData(year, yearFullData)));//当年
-        serieses.add(new Series(legendData[2], "line", 1, yearData(year, percent)));//同比增长
+        //上一年同期
+        serieses.add(new Series(legendData[0], "bar", 0, yearData(year, lastyearFullData)));
+        //当年
+        serieses.add(new Series(legendData[1], "bar", 0, yearData(year, yearFullData)));
+        //同比增长
+        serieses.add(new Series(legendData[2], "line", 1, yearData(year, percent)));
         result.setSeriesData(serieses);
         return result;
     }

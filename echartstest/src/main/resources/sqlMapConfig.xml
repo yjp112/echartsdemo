@@ -9,5 +9,6 @@
     </typeAliases>
     <mappers>
         <mapper resource="com/supconit/zhyy/person/mapper/PersonMapper.xml"/>
+        <mapper resource="com/supconit/zhyy/echarts/mapper/EchartsDataMapper.xml"/>
     </mappers>
 </configuration>

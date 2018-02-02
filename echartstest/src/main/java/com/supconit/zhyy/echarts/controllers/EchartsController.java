@@ -45,13 +45,13 @@ public class EchartsController {
         } catch (Exception ex) {
             ///return null;
         }
-       /* String parse = JSON.toJSONString(chartData);
+       /*String parse = JSON.toJSONString(chartData);*/
 
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
-        printWriter.write(parse);
+        printWriter.write(chartData.toString());
         printWriter.flush();
-        printWriter.close();*/
+        printWriter.close();
         return chartData;
     }
 
@@ -65,9 +65,12 @@ public class EchartsController {
     @RequestMapping("/index.do")
     public String index(Model model) {
         //初始化单位、年等公用参数
-        model.addAttribute("firstyear", DateUtils.getCurrentYear() - 2);//前年
-        model.addAttribute("secondyear", DateUtils.getCurrentYear() - 1);//去年
-        model.addAttribute("nowyear", DateUtils.getCurrentYear());//当前年份
+        //前年
+        model.addAttribute("firstyear", DateUtils.getCurrentYear() - 2);
+        //去年
+        model.addAttribute("secondyear", DateUtils.getCurrentYear() - 1);
+        //当前年份
+        model.addAttribute("nowyear", DateUtils.getCurrentYear());
         return "echarts/index";
     }
 

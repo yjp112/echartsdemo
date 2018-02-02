@@ -15,10 +15,10 @@ import java.util.Map;
  */
 @Repository
 public class EchartsDaoImpl extends SqlSessionDaoSupport implements EchartsDao {
-    //private static final String NAMESPACE = EchartsData.class.getName();
+
+    private static final String NAMESPACE2 = EchartsData.class.getName();
 
     private static final String NAMESPACE = "com.supconit.zhyy.echarts.mapper.EchartsDataMapper.";
-
 
     /**
      * 统计分析--按年 yyyy
@@ -29,7 +29,7 @@ public class EchartsDaoImpl extends SqlSessionDaoSupport implements EchartsDao {
      */
     @Override
     public List<EchartsData> getDataByYear(Integer year, String areaCode) {
-        List<EchartsData>  list = getSqlSession().selectList("getDataByYear",null);
+        List<EchartsData> list = getSqlSession().selectList(NAMESPACE + "getDataByYear", null);
         return list;
         /*Map<String, Object> para = assembleParam(year, null, null, areaCode);
         //return selectList("getDataByYear", para);

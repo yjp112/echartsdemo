@@ -17,7 +17,7 @@ import java.util.Map;
 @Repository
 public class PersonDaoImpl extends SqlSessionDaoSupport implements PersonDao {
 
-    private static final String ns = "com.person.shaye.mapper.PersonMapper.";
+    private static final String ns = "com.supconit.zhyy.person.mapper.PersonMapper.";
 
     @Override
     public void savePeson(Person person) {
@@ -42,8 +42,9 @@ public class PersonDaoImpl extends SqlSessionDaoSupport implements PersonDao {
 
     @Override
     public List<Person> selectPersonByCondition(QueryCondition qc) {
-        return getSqlSession().selectList(ns + "selectPersonByCondition",
+        List<Person> list = getSqlSession().selectList(ns + "selectPersonByCondition",
                 qc);
+        return list;
     }
 
     @Override
