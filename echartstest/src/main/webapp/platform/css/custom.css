@@ -1,0 +1,48 @@
+/*MY CSS*/
+
+/* header 样式模块 */
+/*.ui-header{
+  width: 100%;
+  height: 61px;
+  background: url(../images/ui-header-bg.png) repeat-x;
+  position: relative;
+}
+
+.ui-header .ui-header-left{
+  float: left;
+  height: 61px;
+  width: 304px;
+  background: url("../images/ui-header-left.png") no-repeat;
+}
+.ui-header .ui-header-middle{
+  float: left;
+  height: 61px;
+  width: 1434px;
+}*/
+
+/*.ui-header .ui-header-right{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 61px;
+  width: 480px;
+  background: url("../images/ui-header-right.png") no-repeat 0 50%;
+}
+
+.ui-header-right .ui-header-info {
+  float: right;
+  color: #fff;
+  position: absolute;
+  left: 50px;
+  top: 14px;
+  width: 350px;
+  height: 30px;
+  line-height: 30px;
+  text-align: left;
+}*/
+
+
+
+
+
+

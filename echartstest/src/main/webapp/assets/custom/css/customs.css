@@ -1,0 +1,103 @@
+/*tabstrip*/
+.k-tabstrip{
+    border: 0;
+    background: none;
+}
+.k-tabstrip:focus{
+    box-shadow:none;
+}
+.k-tabstrip .k-tabstrip-items,.k-tabstrip .k-content{
+    margin: 0;
+    padding: 0;
+}
+.k-tabstrip .k-content{
+    overflow: auto;
+    position: relative;
+}
+.k-tabstrip .k-content.k-state-active{
+    border-color: #ccc;
+}
+.k-tabstrip-items .k-state-default,
+.k-ie7 .k-tabstrip-items .k-state-default .k-loading{
+    border-top: 0;
+    border-color: #ccc;
+    margin-right: 5px;
+}
+
+/*input 框*/
+.ui-dialog-form .small{
+    width:120px;
+}
+.k-textcheck,.k-textcheck[readonly],.k-textcheck[readonly]:hover{
+    background: #fff;
+}
+
+/*button*/
+.k-button{padding: 2px 10px;}
+.k-button .fa{margin-right: 7px;}
+.grid_operates li a i.fa-reply{color:#5ea2d5;}
+.grid_operates li a i.fa-save{color:#44aa22;}
+
+.k-input.n-invalid{border:#F00 1px solid !important;}
+.ui-dialog-form select.k-textbox,
+select.k-textbox,
+.ui-dialog-form select.k-textbox:hover,
+select.k-textbox:hover,
+.ui-dialog-form select.k-textbox:focus,
+select.k-textbox:focus
+{background: #fff url(../images/combox_bg.png) right center no-repeat;}
+select.k-textbox option{
+    height: 20px;
+    padding: 4px;
+}
+.ui-dialog-form select.k-textbox.n-invalid,
+select.k-textbox.n-invalid{
+    color: #808080;
+}
+.ui-dialog-form .actions{z-index: 9999;}
+
+
+
+/*传统表格样式*/
+.ui-table{
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    color: #808080;
+}
+.ui-table thead tr{
+    background-color: #ededed;
+    background: linear-gradient(top, #fafafa, #ededed);
+    background: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#ededed));
+    background: -moz-linear-gradient(top, #fafafa, #ededed);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#fafafa, endColorstr=#ededed);
+    background: -o-linear-gradient(top, #fafafa, #ededed);
+}
+.ui-table td,.ui-table th{
+    height: 18px;
+    line-height: 18px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+.ui-table th{
+    font-weight: normal;
+}
+.ui-table .t-c{text-align: center;}
+.ui-table .t-l{text-align: left;}
+.ui-table .t-r{text-align: right;}
+
+.ui-table-addRow{
+    margin: 5px;
+    width: 1076px;
+}
+.ui-table-addRow .k-textbox,.ui-table-addRow .k-input,.ui-table-addRow .k-textbox:hover,.ui-table-addRow .k-input:hover{
+    border:none;
+    background: none;
+}
+
+/*搜索表单外部表格*/
+.ui-search-table{
+    width: 100%;
+}
+.ui-search-table .ui-search-name{
+    text-align: right;
+}

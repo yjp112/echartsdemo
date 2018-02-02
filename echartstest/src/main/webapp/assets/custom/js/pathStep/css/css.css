@@ -1,0 +1,58 @@
+.Page-path {
+    width: 820px;
+    margin: 0 auto;
+    height: 60px;
+}
+.Page-path ul {
+    padding: 0 20px;
+    margin: 0 auto;
+    height: 60px;
+}
+.Page-path ul li {
+    display: block;
+    float: left;
+    max-width: 300px;
+    width: 200px;
+    height:60px;
+    background: url(image/Apath-li-bg.png) no-repeat 100% 50%;
+    position: relative;
+}
+.Page-path ul li:first-child {
+    width: 21px;
+    background: url(image/Apath-li-first-bg.png) no-repeat 100% 50%;
+}
+.Page-path ul li.on {
+    background: url(image/Apath-li-bg-hover.png) no-repeat 100% 50%;
+}
+.Page-path ul .on:first-child {
+    background: url(image/Apath-li-first-bg-hover.png) no-repeat 100% 50%;
+}
+
+.Page-path ul li .num {
+    display: block;
+    position: absolute;
+    top: 18px;
+    right: 0;
+    width: 21px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #646464;
+}
+.Page-path ul li.on .num {
+    color: #fff;
+}
+.Page-path ul li:first-child .num {
+    left: 0px;
+}
+.Page-path ul li .top {
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    right: -28px;
+    width: 80px;
+    height: 22px;
+    text-align: center;
+}

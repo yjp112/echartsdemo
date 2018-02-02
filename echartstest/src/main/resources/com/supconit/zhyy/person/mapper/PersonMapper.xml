@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace:当前映射文件的命名空间, 规范是映射文件的包的全名不包括后缀名 -->
+<mapper namespace="com.supconit.zhyy.person.mapper.PersonMapper">
+	<!-- 当前映射文件使用二级缓存 -->
+	<!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+	<!-- 在数据库中要查询所有的自定义表对应的实体类都用resultMap 查询非自定义的数据类型（jdk提供的数据类型）是用resultType 
+		type:要映射实体类 -->
+	<resultMap type="person" id="BaseResultMap">
+		<!-- column:表中的列名 property：要映射的实体类的属性名 -->
+		<id column="person_id" property="personId" />
+		<result column="name" property="name" />
+		<result column="gender" property="gender" />
+		<result column="person_addr" property="personAddr" />
+		<result column="birthday" property="birthday" />
+	</resultMap>
+	<!-- 可以提取出一些公用的sql片段 -->
+	<sql id="columns">
+		person_id, name, gender, person_addr, birthday
+	</sql>
+	<!-- id:sql的唯一标识不能重复 parameterType：sql接收的参数的数据类型 resultType：sql返回的数据类型 #{id}：用于接收参数，{}中的内容如果是一个参数内容任意，select 
+		* from person_test where id = ?采用预编译方式生成sql，可以防止sql注入 注意：sql后面不要加";" useCache：true是使用二级缓存，false禁用二级缓存，默认是true -->
+	<select id="selectPersonById" parameterType="int" resultMap="BaseResultMap"
+		useCache="true">
+		select
+		<include refid="columns" />
+		from person where person_id = #{id}
+	</select>
+
+	<!-- ======================数据库变更===================================== -->
+
+	<insert id="insert" parameterType="person">
+		<!-- keyProperty:要接收主键返回的属性名 order：生成主键和insert的sql的执行顺序， mysql是AFTER，oracle中是BEFORE 
+			resultType：返回主键的数据类型 生成主键的sql：mysql ：select LAST_INSERT_ID(); oracle: select 
+			seqxxxx.nextval from dual -->
+		<selectKey keyProperty="personId" order="AFTER" resultType="int">
+			select LAST_INSERT_ID()
+		</selectKey>
+		insert into person(person_id, name, gender, person_addr, birthday)
+		values(#{personId}, #{name}, #{gender}, #{personAddr}, #{birthday})
+	</insert>
+
+	<!-- mysql中删除不要使用别名 -->
+	<delete id="delete" parameterType="int">
+		delete from person where
+		person_id = #{personId}
+	</delete>
+
+	<!-- =======================动态sql================================ -->
+	<!-- <where>是动态条件组合查询的限制的标签，能处理第一个多余的and -->
+	<select id="selectPersonByCondition" parameterType="qc"
+		resultMap="BaseResultMap">
+		select * from person t
+		<where>
+			<if test="name != null and name != ''">
+				t.name like '%${name}%'
+			</if>
+			<if test="gender != null">
+				and t.gender = #{gender}
+			</if>
+			<if test="personAddr != null and personAddr != ''">
+				and t.person_addr like '%${personAddr}%'
+			</if>
+			<if test="birthday != null">
+				<![CDATA[
+					and t.birthday < #{birthday}
+				]]>
+			</if>
+		</where>
+	</select>
+
+	<!-- 动态的修改使用<SET>标签，可以去掉最后一个多余的"," -->
+	<update id="dynamicUpdate" parameterType="person">
+		update person p
+		<set>
+			p.person_id = #{personId},
+			<if test="name != null">
+				p.name = #{name},
+			</if>
+			<if test="gender != null">
+				p.gender = #{gender},
+			</if>
+			<if test="personAddr != null">
+				p.person_addr = #{personAddr},
+			</if>
+			<if test="birthday != null">
+				p.birthday = #{birthday}
+			</if>
+		</set>
+		where p.person_id = #{personId}
+	</update>
+	<delete id="deleteBatch" parameterType="map">
+		delete from person where person_id in
+		<foreach collection="ids" open="(" close=")" item="personId"
+			separator=",">
+			#{personId}
+		</foreach>
+	</delete>
+
+</mapper>
