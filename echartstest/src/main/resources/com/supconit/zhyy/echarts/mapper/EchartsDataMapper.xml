@@ -4,8 +4,34 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.supconit.zhyy.echarts.mapper.EchartsDataMapper">
 
-    <select id="getDataByYear"
-            resultType="com.supconit.zhyy.echarts.entities.EchartsData">
+    <select id="getDataByYear" resultType="com.supconit.zhyy.echarts.entities.EchartsData">
         SELECT MONTH_KEY xKey ,OUT_VALUE result FROM W_FLOW_AREA_MONTH
+       <!-- <where>
+            <if test="''!=year and  null!=year">
+                AND MONTH_KEY LIKE '%'+#{year}+'%'
+            </if>
+            <if test="''!=areaCode and  null!=areaCode">
+                AND AREA_CODE LIKE '%'+#{areaCode}+'%'
+            </if>
+
+        </where>-->
+    </select>
+    <select id="getDataByMonth" resultType="com.supconit.zhyy.echarts.entities.EchartsData">
+        SELECT DAY_OF_MONTH_KEY xKey ,OUT_VALUE result FROM w_flow_area_day
+        <!--<where>
+            <if test="''!=year and  null!=year">
+                AND DAY_OF_MONTH_KEY LIKE '%'+#{year}+'%'
+            </if>
+        </where>-->
+
+    </select>
+    <select id="getDataByDay" resultType="com.supconit.zhyy.echarts.entities.EchartsData">
+        SELECT COLLECT_HOUR xKey ,OUT_VALUE result FROM w_flow_area_hour
+        <!--<where>
+            <if test="''!=year and  null!=year">
+                AND COLLECT_DATE LIKE '%'+#{year}+'%'
+            </if>
+        </where>-->
+
     </select>
 </mapper>

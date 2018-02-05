@@ -13,11 +13,11 @@
 </head>
 
 <body>
-This is my JSP page.
 <script  src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script  src="${pageContext.request.contextPath}/js/jquery-1.8.3.js"></script>
 <script src="${pageContext.request.contextPath}/assets/hc/js/jquery-1.11.1.js"></script>
 <a href="${pageContext.request.contextPath}/person/listPerson.do">人员</a>
+<br>
 <a href="${pageContext.request.contextPath}/echarts/index.do">ECharts图表</a>
 <script type="javascript">
     $(function(){

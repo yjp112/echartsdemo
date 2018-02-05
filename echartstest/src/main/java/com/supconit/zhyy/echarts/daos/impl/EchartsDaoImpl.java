@@ -22,18 +22,15 @@ public class EchartsDaoImpl extends SqlSessionDaoSupport implements EchartsDao {
 
     /**
      * 统计分析--按年 yyyy
-     *
      * @param year
      * @param areaCode
      * @return
      */
     @Override
     public List<EchartsData> getDataByYear(Integer year, String areaCode) {
-        List<EchartsData> list = getSqlSession().selectList(NAMESPACE + "getDataByYear", null);
+        Map<String, Object> para = assembleParam(year, null, null, areaCode);
+        List<EchartsData> list = getSqlSession().selectList(NAMESPACE + "getDataByYear", para);
         return list;
-        /*Map<String, Object> para = assembleParam(year, null, null, areaCode);
-        //return selectList("getDataByYear", para);
-        return getSqlSession().selectList(NAMESPACE + "getDataByYear", para);*/
 
     }
 
@@ -47,9 +44,11 @@ public class EchartsDaoImpl extends SqlSessionDaoSupport implements EchartsDao {
      */
     @Override
     public List<EchartsData> getDataByMonth(Integer year, Integer month, String areaCode) {
-        Map<String, Object> para = assembleParam(year, month, null, areaCode);
+        List<EchartsData> list = getSqlSession().selectList(NAMESPACE + "getDataByMonth", null);
+        return list;
+        /*Map<String, Object> para = assembleParam(year, month, null, areaCode);
         // return selectList("getDataByMonth", para);
-        return getSqlSession().selectList(NAMESPACE + "getDataByMonth", para);
+        return getSqlSession().selectList(NAMESPACE + "getDataByMonth", para);*/
     }
 
     /**
@@ -63,9 +62,11 @@ public class EchartsDaoImpl extends SqlSessionDaoSupport implements EchartsDao {
      */
     @Override
     public List<EchartsData> getDataByDay(Integer year, Integer month, Integer day, String areaCode) {
-        Map<String, Object> para = assembleParam(year, month, day, areaCode);
+        List<EchartsData> list = getSqlSession().selectList(NAMESPACE + "getDataByDay", null);
+        return list;
+        /*Map<String, Object> para = assembleParam(year, month, day, areaCode);
         //return selectList("getDataByDay", para);
-        return getSqlSession().selectList(NAMESPACE + "getDataByDay", para);
+        return getSqlSession().selectList(NAMESPACE + "getDataByDay", para);*/
     }
 
 

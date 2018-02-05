@@ -46,7 +46,7 @@
 <div class="ui-layout-center" id="subMain">
     <div class="ui-layout-north">
         <form class="ui-form " id='queryForm'>
-            <input type="hidden" id="year" name="year" 　value="$!{nowyear}">
+            <input type="hidden" id="year" name="year" 　value="${nowyear}">
             <input type="hidden" id="code" name="code" 　value="">
             <input type="hidden" id="llMonth">
             <input type="hidden" id="llBack">
@@ -92,6 +92,7 @@
 <script src="${pageContext.request.contextPath}/assets/custom/js/echarts/echarts.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/platform/zrender/tool/color.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/assets/custom/js/analysisChart.js" type="text/javascript"></script>
+#parse("index/_footer.vm")
 <script type="text/javascript">
     var _iframe_layout, _inner_layout, chart1, chart2, chart3, chart4;
     var code = "";
@@ -127,7 +128,7 @@
         });
     });
 
-    //#年份查询,按年份切换查询
+    //年份查询,按年份切换查询
     function linkTo(obj) {
         var year;
         //移除样式
@@ -182,7 +183,7 @@
     }
 
 
-    //#通过ajax获取当前所选数据
+    //通过ajax获取当前所选数据
     function getChart(index, year, month, day, code) {
         if (year == "") {
             year = new Date().getFullYear();
@@ -190,7 +191,6 @@
         var timestamp = year + "年";
         if (3 == index && chart3) {
             chart3.dispose();
-
             $("#main3").css({"filter": "", "background-color": ""});//解决IE下出现暂无数据图片显示不出
         }
         ;
@@ -207,21 +207,17 @@
 
         $.ajax({
             url: url,
-            type: "post",
-            //dataType:"json",
+            dataType: "json",
             data: {},
             success: function (data) {
-                debugger;
                 if (null != data) {
-                    if (null != data && null != data.seriesData && undefined != data.seriesData && data.seriesData.length > 0) {
+                    if (null != data && null != data.seriesData && undefined != data.seriesData && data.seriesData.length > 0)
                         showChart(index, data, timestamp);
-                    }
                 } else {
-                    $("#main" + index).html("<img src='${pageContext.request.contextPath}/assets/xjgl/skins/xjgl/images/noData.png' />");
+                    $("#main" + index).html("<img src='${pageContext.request.contextPath}/assets/gwxj/images/noData.png' />");
                 }
             },
-            error: function (data) {
-                debugger;
+            error: function () {
                 notify("数据加载出错", "warn");
             }
         })
@@ -262,6 +258,7 @@
             });//去掉水质分析图表中的最大值、最小值、平均值显示，modify by hht at 201704281006
         });
         if (3 == index) {
+            //调用后面
             flowLineBarChart({
                 title: timestamp + "出水流量分析",
                 elementId: elementId,

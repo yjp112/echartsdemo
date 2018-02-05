@@ -1,5 +1,6 @@
 package com.supconit.zhyy.echarts.controllers;
 
+import com.alibaba.fastjson.JSON;
 import com.supconit.zhyy.echarts.entities.EchartsData;
 import com.supconit.zhyy.echarts.services.EchartsService;
 import com.supconit.zhyy.echarts.utils.DateUtils;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
@@ -34,25 +36,22 @@ public class EchartsController {
      * @return
      */
 
-    @RequestMapping("/getData.do")
+    @RequestMapping("/getData")
     @ResponseBody
-    public EchartsData getData(HttpServletResponse response, Integer year, Integer month, Integer day, String areaCode, PrintWriter printWriter) {
-
+    public void getData(HttpServletResponse response, Integer year, Integer month, Integer day, String areaCode, PrintWriter printWriter) {
         year = null == year ? DateUtils.getCurrentYear() : year;
         EchartsData chartData = null;
         try {
             chartData = echartsService.getData(year, month, day, areaCode);
+
+            String jsonData = JSON.toJSONString(chartData);
+            response.getWriter().write(jsonData);
+            PrintWriter writer = response.getWriter();
+            writer.flush();
+            writer.close();
         } catch (Exception ex) {
             ///return null;
         }
-       /*String parse = JSON.toJSONString(chartData);*/
-
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
-        printWriter.write(chartData.toString());
-        printWriter.flush();
-        printWriter.close();
-        return chartData;
     }
 
 
@@ -62,7 +61,7 @@ public class EchartsController {
      * @param model
      * @return
      */
-    @RequestMapping("/index.do")
+    @RequestMapping("/index")
     public String index(Model model) {
         //初始化单位、年等公用参数
         //前年
